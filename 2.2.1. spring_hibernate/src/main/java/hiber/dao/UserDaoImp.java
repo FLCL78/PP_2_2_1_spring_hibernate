@@ -13,8 +13,13 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-   @Autowired
+
    private SessionFactory sessionFactory;
+
+   @Autowired
+   public UserDaoImp(SessionFactory sessionFactory) {
+      this.sessionFactory = sessionFactory;
+   }
 
    @Override
    public void add(User user) {
@@ -30,6 +35,7 @@ public class UserDaoImp implements UserDao {
       return query.getResultList();
    }
 
+   @Override
    public User getUserFromCar(String model, int series) {
 
       TypedQuery<User> query =  sessionFactory.getCurrentSession()
